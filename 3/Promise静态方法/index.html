@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        let urls = [
+            "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=20065882,4184823739&fm=26&gp=0.jpg",
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1594880883854&di=79292bed91b61c8768b462e3e2158a2b&imgtype=0&src=http%3A%2F%2Fimg1.gtimg.com%2Fkid%2Fpics%2Fhv1%2F185%2F110%2F2196%2F142823135.jpg",
+            "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3139944264,58746346&fm=26&gp=0.jpg",
+            "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1820545127,3012673259&fm=26&gp=0.jpg",
+        ]
+
+
+        function loadImage(url) {
+            // 返回promise实例
+            return new Promise((resolve, reject) => {
+                // 新建一个图片容器
+                let img = new Image();
+                // 修改路径
+                img.src = url
+                // 监听读取成功事件
+                img.onload = () => {
+                    setTimeout(() => {
+                        // 成功
+                        resolve(img)
+                    }, Math.random() * 3000)
+                }
+                // 监听读取失败事件
+                img.onerror = () => {
+                    reject()
+                }
+            })
+        }
+        // 获取实例
+        let arr = urls.map(item => {
+            return loadImage(item)
+        })
+        // race 静态方法  任意一个promise实例变成成功状态即可  返回成功的实例
+        // all 静态方法  所有promise实例成功才行  返回数组 
+        Promise.race(arr).then(result => {
+            document.body.append(result)
+        })
+    </script>
+</body>
+
+</html>

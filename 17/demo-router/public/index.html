@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            width: 50px
+        }
+
+        ul li {
+            list-style: none;
+            display: inline-block;
+            padding: 0 10px;
+        }
+
+        .active {
+            color: red;
+            background: skyblue;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>姓名</td>
+            <td>图片</td>
+        </tr>
+    </table>
+    <ul>
+    </ul>
+    <script src="./js/axios.js"></script>
+    <script>
+        let index = 2,
+            num = 20,
+            table = document.querySelector("table"),
+            ul = document.querySelector("ul");
+
+        render()
+
+        bindEvent();
+
+        function bindEvent() {
+            ul.addEventListener("click", (e) => {
+                let tar = e.target;
+                if (tar.nodeName === "LI") {
+                    index = tar.innerHTML - 1;
+                    render()
+                }
+            })
+        }
+
+
+        function render() {
+            axios.get("/api/page", {
+                params: {
+                    index,
+                    num,
+                }
+            }).then(result => {
+                table.innerHTML = result.data.data.map(item => {
+                    return `
+                    <tr>
+                        <td>${item.id}</td>
+                        <td>${item.username}</td>
+                        <td>
+                            <img src="${item.url}"/>
+                        </td>
+                    </tr>
+                    `
+                }).join("")
+                let str = "";
+                for (let i = 1; i <= result.data.maxCode; i++) {
+                    str += `<li class="${index === i -1?"active":""}">${i}</li>`
+                }
+                ul.innerHTML = str;
+            })
+        }
+    </script>
+</body>
+
+</html>

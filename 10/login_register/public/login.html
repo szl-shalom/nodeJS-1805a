@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="content">
+        <input type="text" class="username">
+        <input type="password" class="password">
+        <button class="login">登录</button>
+    </div>
+    <script src="./js/axios.js"></script>
+    <script>
+        let username = document.querySelector(".username"),
+            password = document.querySelector(".password"),
+            login = document.querySelector(".login");
+
+        login.addEventListener("click", () => {
+            // 发送post请求的数据
+            axios.post("/api/login", {
+                // 使用data
+                data: {
+                    username: username.value,
+                    password: password.value,
+                }
+            }).then(result => {
+                // 判断转改
+                result.data ?
+                    location.href = "./index.html" :
+                    alert("账户密码不正确")
+            })
+        })
+    </script>
+</body>
+
+</html>

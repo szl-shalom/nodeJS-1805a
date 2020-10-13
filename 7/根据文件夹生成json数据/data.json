@@ -1,0 +1,75 @@
+{
+    "type": "folder",
+    "pathname": "hh",
+    "name": "hh",
+    "children": [{
+        "type": "folder",
+        "pathname": "hh\\css",
+        "name": "css",
+        "children": [{
+            "type": "file",
+            "name": "index.css",
+            "content": "",
+            "extname": ".css",
+            "size": 0,
+            "pathname": "hh\\css\\index.css"
+        }, {
+            "type": "file",
+            "name": "reset.css",
+            "content": "",
+            "extname": ".css",
+            "size": 0,
+            "pathname": "hh\\css\\reset.css"
+        }]
+    }, {
+        "type": "file",
+        "name": "index.html",
+        "content": "",
+        "extname": ".html",
+        "size": 0,
+        "pathname": "hh\\index.html"
+    }, {
+        "type": "folder",
+        "pathname": "hh\\js",
+        "name": "js",
+        "children": [{
+            "type": "file",
+            "name": "swiper.js",
+            "content": "",
+            "extname": ".js",
+            "size": 0,
+            "pathname": "hh\\js\\swiper.js"
+        }, {
+            "type": "file",
+            "name": "utils.js",
+            "content": "",
+            "extname": ".js",
+            "size": 0,
+            "pathname": "hh\\js\\utils.js"
+        }]
+    }, {
+        "type": "folder",
+        "pathname": "hh\\scss",
+        "name": "scss",
+        "children": [{
+            "type": "file",
+            "name": "reset.scss",
+            "content": "",
+            "extname": ".scss",
+            "size": 0,
+            "pathname": "hh\\scss\\reset.scss"
+        }, {
+            "type": "folder",
+            "pathname": "hh\\scss\\utils",
+            "name": "utils",
+            "children": [{
+                "type": "file",
+                "name": "common.scss",
+                "content": "",
+                "extname": ".scss",
+                "size": 0,
+                "pathname": "hh\\scss\\utils\\common.scss"
+            }]
+        }]
+    }]
+}

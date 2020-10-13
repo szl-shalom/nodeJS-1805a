@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background: tomato;
+            border-radius: 50%;
+            transition: transform .5s;
+            transform: translate(0, 0);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        window.onload = function () {
+            let box = document.querySelector(".box"),
+                globalRes = null; //把resolve保存在外部
+            // 运动函数
+            function moveTo(x, y) {
+                // 返回promise实例
+                return new Promise(resolve => {
+                    // 
+                    box.style.transform = `translate(${x}px,${y}px)`;
+                    // 把resolve保存在外部
+                    globalRes = resolve;
+                })
+            }
+            // 监听事件  动画完成事件
+            box.addEventListener("transitionend", () => {
+                globalRes()
+            })
+            // 链式调用
+            moveTo(100, 100).then(() => {
+                console.log("小球运动到 100 100了")
+                return moveTo(200, 200)
+            }).then(() => {
+                console.log("小球运动到 200 200了")
+                return moveTo(500, 100)
+            }).then(() => {
+                console.log("小球运动到 500 100了")
+            })
+        }
+    </script>
+</body>
+
+</html>

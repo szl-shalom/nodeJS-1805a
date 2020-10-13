@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span.active {
+            color: red
+        }
+
+        .content div {
+            display: none;
+        }
+
+        .content div.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title">
+        <span>item-1</span>
+        <span>item-2</span>
+        <span>item-3</span>
+        <span>item-4</span>
+    </div>
+    <div class="content">
+        <div>内容---1</div>
+        <div>内容---2</div>
+        <div>内容---3</div>
+        <div>内容---4</div>
+    </div>
+
+    <script>
+        class Tab {
+            constructor(opt) {
+                Object.assign(this, opt);
+                this.init();
+            }
+            init() {
+                this.bindEvent();
+            }
+            bindEvent() {
+
+
+                [...this.title.children].forEach((item, index) => {
+
+                    item.addEventListener("click", () => {
+                        this.title.querySelector(".active") && this.title.querySelector(".active")
+                            .classList.remove("active")
+                        item.classList.add("active")
+
+                        this.content.querySelector(".active") && this.content.querySelector(
+                            ".active").classList.remove("active")
+                        this.content.children[index].classList.add("active")
+                    })
+                })
+            }
+        }
+
+
+        new Tab({
+            title: document.querySelector(".title"),
+            content: document.querySelector(".content"),
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" class="username">
+    <input type="text" class="password">
+    <button class="login">登录</button>
+    <button class="register">注册</button>
+    <script src="./js/axios.js"></script>
+    <script>
+        let username = document.querySelector(".username"),
+            password = document.querySelector(".password"),
+            login = document.querySelector(".login"),
+            register = document.querySelector(".register");
+
+        login.addEventListener("click", () => {
+            if (username.value === "" || password.value === "") {
+                alert("账户密码不可以为空！！！")
+                return;
+            }
+
+
+            axios.post("/api/login", {
+                username: username.value,
+                password: password.value
+            }).then(result => {
+                if (result.data.code) {
+                    localStorage.setItem("token", username.value);
+                    location.href = "./index.html";
+                } else {
+                    alert("账户密码不正确")
+                }
+            })
+        })
+
+
+        register.addEventListener("click", () => {
+            if (username.value === "" || password.value === "") {
+                alert("账户密码不可以为空！！！")
+                return;
+            }
+
+            axios.post("/api/register", {
+                username: username.value,
+                password: password.value
+            }).then(result => {
+                if (result.data.code) {
+                    alert("注册成功")
+                } else {
+                    alert("此用户已经被注册，请重新注册")
+                }
+            })
+        })
+
+        ul.addEventListener("click", (e) => {
+            let tar = e.target;
+            if (tar.className === "del") {
+                axios.post("/api/data/del").then(result => {
+                    result.data.code && render()
+                })
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div qwe="123">1</div>
+    <div qwe="123">2</div>
+    <div qwe="123">3</div>
+    <div qwe="123">4</div>
+    <div qwe="123">5</div>
+    <div qwe="123">6</div>
+    <h1 qwe="123123123"></h1>
+    <script>
+        function getDom(attr) {
+            return [...document.querySelectorAll("*")].filter(item => {
+                return item.getAttribute(attr)
+            })
+        }
+
+        let arr = [{
+            time: 6384568345
+        }, {
+            time: 6384568345123123123
+        }, {
+            time: 6384568345123123
+        }]
+
+        function sort(arr) {
+            return arr.sort((a, b) => {
+                return b.time - a.time
+            })
+        }
+
+
+        console.log(getDom("qwe"))
+        console.log(sort(arr))
+    </script>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-07-30 10:35:43
+ * @LastEditTime: 2020-07-30 11:38:10
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \1805A\15\demo\public\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <b class="add">新增</b>
+            <div>
+                搜索
+                <input type="text" placeholder="请输入搜索的内容" class="search">
+            </div>
+        </div>
+        <div class="content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>姓名</th>
+                        <th>年龄</th>
+                        <th>头像</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ID</td>
+                        <td>姓名</td>
+                        <td>年龄</td>
+                        <td>头像</td>
+                        <td>
+                            <b>编辑</b>
+                            <b>删除</b>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="dialog">
+        <div class="content">
+            <input type="text" class="username">
+            <input type="text" class="age">
+            <button class="submit">提交</button>
+            <button class="close">关闭</button>
+        </div>
+    </div>
+
+
+    <script src="./js/axios.js"></script>
+    <script src="./js/index.js"></script>
+
+    <!-- 
+    <script>
+        let arr = [{
+            user: "张三",
+            age: 18,
+        }, {
+            user: "李四",
+            age: 18,
+        }, {
+            user: "王五",
+            age: 18,
+        },{
+            user: "王楼",
+            age: 18,
+        }]
+        
+        let res = arr.filter(item => {
+            return item.user.includes("王")
+        })
+        console.log(res)
+    </script> -->
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" class="username">
+    <input type="password" class="password">
+    <button class="login">登录</button>
+    <script src="./js/axios.js"></script>
+    <script>
+        let username = document.querySelector(".username"),
+            password = document.querySelector(".password"),
+            login = document.querySelector(".login");
+        // 登录
+        const gotoLogin = () => {
+            let params = {
+                username: username.value,
+                password: password.value
+            }
+            // 发送数据
+            axios.get("/api/login", {
+                params,//参数
+            }).then(result => {
+                // 结果
+                console.log(result)
+            })
+        }
+        // 按钮点击事件 登录
+        login.addEventListener("click", gotoLogin);
+    </script>
+</body>
+
+</html>

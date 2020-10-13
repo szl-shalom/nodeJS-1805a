@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="p1">p1
+        <div class="p2">
+            p2
+            <div class="p3">
+                p3
+            </div>
+        </div>
+    </div>
+    <script>
+        let p1 = document.querySelector(".p1")
+        let p2 = document.querySelector(".p2")
+        let p3 = document.querySelector(".p3")
+        // window
+        p1.onclick = () => {
+            // window
+            p2.onclick = function () {
+                // p2
+                p3.onclick = () => {
+                    console.log(this)
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

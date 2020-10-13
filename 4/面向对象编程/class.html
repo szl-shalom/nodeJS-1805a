@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1、使用class新建的类 是一个函数  此函数必须使用new进行实例化
+        // 2、使用class新建的类 必须有一个构造器 constructor ,如果你没有写 默认添加一个空的
+        // 3、其实constructor相当于构造函数  在实例化的时候会自动执行
+
+        class Tab {
+            // 构造器
+            constructor(name, age) {
+                // 实例属性
+                this.name = name;
+                this.age = age;
+            }
+            // 原型方法
+            sayName() {
+                console.log(this.name, this.age)
+            }
+            // 静态方法
+            static sayName() {
+                console.log("我是静态了")
+            }
+            // 静态属性
+            static myName = "嘿嘿"
+        }
+        let t1 = new Tab("张三", 18)
+        let t2 = new Tab("李四", 22)
+        Tab.sayName()
+        t2.sayName()
+        console.log(Tab.myName)
+    </script>
+</body>
+
+</html>

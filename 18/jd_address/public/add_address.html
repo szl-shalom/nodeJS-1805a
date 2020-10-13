@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .content p{
+            border-bottom: 1px solid #ccc;
+            padding: 16px 0;
+        }
+        .content p span{
+            width: 100px;
+            display: inline-block;
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <p>
+            <span>收货人</span>
+            <input type="text" class="username">
+        </p>
+        <p>
+            <span>联系方式</span>
+            <input type="text" class="num">
+        </p>
+        <p>
+            <span>地址</span>
+            <input type="text" class="url">
+        </p>
+        <button class="btn">提交</button>
+    </div>
+    <script src="./js/axios.js"></script>
+    <script src="./js/add.js"></script>
+</body>
+
+</html>

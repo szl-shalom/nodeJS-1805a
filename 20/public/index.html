@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        dl {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <dl>
+            <dd>
+                <img src="" alt="">
+            </dd>
+            <dt>
+                <p>标题 ------ 作业</p>
+                <p>描述</p>
+            </dt>
+        </dl>
+    </div>
+    <script src="./js/axios.js"></script>
+    <script>
+        let content = document.querySelector(".content");
+
+        render();
+
+        function render() {
+            axios.get("/api/list").then(result => {
+                content.innerHTML = result.data.map(item => {
+                    return `
+                <dl id="${item.id}">
+                    <dd>
+                        <img src="${item.url}" alt="">
+                    </dd>
+                    <dt>
+                        <p>${item.title} ------ ${item.auther}</p>
+                        <p>${item.desc}</p>
+                    </dt>
+                </dl>
+                `
+                }).join("")
+                bindEvent();
+            })
+        }
+
+        function bindEvent() {
+            [...content.children].forEach(item => {
+                item.addEventListener("click", () => {
+                    location.href = "./detail.html";
+                    localStorage.setItem("id", item.id)
+                })
+            })
+        }
+    </script>
+</body>
+
+</html>

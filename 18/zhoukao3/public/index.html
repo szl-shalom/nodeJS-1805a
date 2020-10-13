@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="username"></div>
+    <ul>
+
+    </ul>
+    <script src="./js/axios.js"></script>
+    <script>
+        document.querySelector(".username").innerHTML = localStorage.getItem("token");
+        let ul = document.querySelector("ul");
+
+        render()
+
+        function render() {
+            axios.get("/api/data").then(result => {
+                ul.innerHTML = result.data.map(item => {
+                    return `
+                        <li>
+                            <span>${item.username}</span>
+                            <span>${item.age}</span>
+                            <b class="del" id="${item.id}">删除</b>
+                        </li>
+                   `
+                }).join("")
+            })
+        }
+
+        ul.addEventListener("click", (e) => {
+            let tar = e.target;
+            if (tar.className === "del") {
+                axios.post("/api/data/del",{
+                    id:tar.id
+                }).then(result => {
+                    result.data.code && render()
+                })
+            }
+        })
+    </script>
+</body>
+
+</html>

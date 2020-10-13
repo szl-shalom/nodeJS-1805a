@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 构造函数
+        function Tab(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+        // 静态方法
+        Tab.say = function () {
+            console.log("say执行了")
+        }
+
+
+        // 构造函数原型
+        Tab.prototype = {
+            // 构造器
+            constructor: Tab,
+            sayName() {
+                console.log(this.name, this.age)
+            }
+        }
+        // 实例化对象
+        let t1 = new Tab("张三", "18");
+        let t2 = new Tab("李四", "22");
+
+
+        Tab.say()
+
+    </script>
+</body>
+
+</html>

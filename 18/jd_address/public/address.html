@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/address.css">
+</head>
+
+<body>
+    <div class="root">
+        <header class="header">
+            <span onclick="javascript:history.back()">&lt;</span>
+            <span>我的收货地址</span>
+            <span onclick="javascript:location.href='add_address.html'">添加</span>
+        </header>
+        <main class="main">
+            <ul>
+
+            </ul>
+        </main>
+    </div>
+    <script src="./js/axios.js"></script>
+    <script src="./js/myTouch.js"></script>
+    <script>
+        let ul = document.querySelector("ul");
+
+        render()
+
+        function render() {
+            axios.get("/api/address").then(result => {
+                ul.innerHTML = result.data.map(item => {
+                    return `
+                <li>
+                    <div class="content">
+                        <span>${item.user}</span>
+                        <span>${item.tel}</span>
+                        <p>${item.address}</p>
+                    </div>
+                    <div class="modify" item=${JSON.stringify(item)}>
+                        编辑
+                    </div>
+                    <div class="del" id="${item.id}" >
+                        删除
+                    </div>
+                </li>
+                `
+                }).join("");
+
+                // touchu
+                [...ul.children].forEach(item => {
+                    myTouch.swipe(item, "left", () => {
+                        item.style.transform = "translate(-14%)"
+                    })
+                })
+            })
+        }
+
+
+        ul.addEventListener("click", e => {
+            let tar = e.target;
+            // 删除
+            if (tar.className === "del") {
+                axios.post("/api/address/del", {
+                    id: tar.id
+                }).then(result => {
+                    result.data.code && render()
+                })
+            }
+            // 编辑
+            if (tar.className === "modify") {
+                let item = tar.getAttribute("item");
+                localStorage.setItem("item", item)
+                location.href = "./modify.html"
+            }
+
+        })
+    </script>
+
+</body>
+
+</html>

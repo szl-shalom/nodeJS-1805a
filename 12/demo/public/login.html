@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text">
+    <input type="text">
+    <button>登录</button>
+    <button>注册</button>
+    <script src="./js/axios.js"></script>
+    <script>
+        let ipts = document.querySelectorAll("input"),
+            btns = document.querySelectorAll("button");
+
+        btns[0].onclick = function () {
+            axios.post("/api/login", {
+                data: {
+                    username: ipts[0].value,
+                    password: ipts[1].value
+                }
+            }).then(result => {
+                console.log(result)
+                result.data ? location.href = "http://www.baidu.com" : alert("账户密码不正了")
+            })
+        }
+
+        btns[1].onclick = function () {
+            axios.post("/api/register", {
+                data: {
+                    username: ipts[0].value,
+                    password: ipts[1].value
+                }
+            }).then(result => {
+                console.log(result)
+                result.data ? alert("OK") : alert("NO")
+            })
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text">
+    <input type="text">
+    <input type="text">
+    <button>修改</button>
+    <script src="./js/axios.js  "></script>
+    <script>
+        // 获取本地存储  item
+        let item = JSON.parse(localStorage.getItem("item")),
+            ipts = document.querySelectorAll("input"),
+            btn = document.querySelector("button");
+
+        // 设置input的值
+        ipts[0].value = item.user
+        ipts[1].value = item.tel
+        ipts[2].value = item.address
+
+
+        btn.addEventListener("click", () => {
+            axios.post("/api/address/modify", {
+                id: item.id,
+                user: ipts[0].value,
+                tel: ipts[1].value,
+                address: ipts[2].value,
+            }).then(result => {
+                if (result.data.code) {
+                    location.href = "./address.html"
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

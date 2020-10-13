@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1、使用es5实现Array.from方法，并且支持二个参数
+        // function myArrayFrom(arr, cb) {
+        //     return cb ?
+        //         Array.prototype.slice.call(arr).map(cb) :
+        //         Array.prototype.slice.call(arr)
+
+        // }
+        // console.log(myArrayFrom({
+        //     0: "a",
+        //     1: "b",
+        //     length: 2
+        // }, function (item) {
+        //     return item + "1"
+        // }))
+
+        // 2、使用es5实现数组的reduce方法
+        Array.prototype.myReduce = function (callback, initValue) {
+            let index = 0, //循环的下表
+                p = initValue; //结果
+            // 注意 判断是否传递了 第二个参数   0是有效值  
+            if (!initValue && initValue !== 0) {
+                index = 1;
+                p = this[0]
+            }
+            for (; index < this.length; index++) {
+                // 每一次第一个参数 是函数的返回值 第二次还需要传入函数
+                p = callback(p, this[index])
+            }
+            return p;
+        }
+
+        // let arr = [{
+        //     age: 18
+        // }, {
+        //     age: 2
+        // }, {
+        //     age: 19
+        // }];
+
+        // console.log(
+        //     arr.myReduce((p, n) => {
+        //         return p + n.age
+        //     }, 0)
+        // )
+
+        //3、 实现遍历器接口
+        function makeIterator(arr) {
+            let index = 0;
+            return {
+                next() {
+                    return index < arr.length ? {
+                        value: arr[index++]
+                    } : {
+                        done: true
+                    }
+                }
+            }
+        }
+
+        // const res = makeIterator([1, 2, 3, 4, 5])
+        // console.log(res.next().value)
+        // console.log(res.next().value)
+        // console.log(res.next().value)
+        // console.log(res.next().value)
+        // console.log(res.next().value)
+        // console.log(res.next().value)
+
+        // 4、
+        // 台阶   可能性      结果
+        // 1      [1]        1
+        // 2      [11][2]    2
+        // 3      [111][12][21]   3
+        // 4      [1111][112][121][211][22]   5
+        // 5      [11111][1112][1121][1211][2111][212][221][122]  8
+
+
+        // 8 = 5 + 3 = 2 + 3 + 1 + 2 = 2 + 1 + 2 + 1 + 2
+
+        function fbnqsl(num) {
+            if (num === 1 || num === 2) {
+                return num
+            }
+            return fbnqsl(num - 1) + fbnqsl(num - 2)
+        }
+        // console.log(fbnqsl(6))
+
+        function formatTime(time) {
+            let curTime = new Date()
+            if (curTime - time < 1000 * 60) {
+                console.log("刚刚")
+            } else if (curTime - time < 1000 * 60 * 60) {
+                console.log("三分钟前")
+            } else if (curTime - time < 1000 * 60 * 60 * 24) {
+                console.log("8小时前")
+            }
+
+        }
+
+        // formatTime(new Date() - 1000 * 60 * 60 * 10)
+        //  写一个数组去重的方法
+        function unique(arr) {
+            return [...new Set(arr)]
+        }
+        //  实现一个深拷贝方法
+        function deepClone(data) {
+            let res;
+            // 判断是不是引用数据类型   array || object 
+            if (typeof data !== "object") {
+                return data
+            }
+            // 判断是不是数组
+            let flag = Array.isArray(data)
+            if (flag) {
+                res = [];
+                // 是数组
+                data.forEach(item => {
+                    res.push(deepClone(item))
+                })
+            } else {
+                // 是对象
+                res = {};
+                for (let key in data) {
+                    res[key] = deepClone(data[key])
+                }
+            }
+            return res;
+
+        }
+        let a = {
+            b: 1,
+            c: [{
+                d: 1
+            }]
+        }
+        let res = deepClone(a)
+        console.log(res,a)
+    </script>
+</body>
+
+</html>

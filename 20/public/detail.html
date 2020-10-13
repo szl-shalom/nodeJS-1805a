@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body,
+        .wrapper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main {
+            flex: 1;
+            height: 100%;
+        }
+
+        .footer {
+            height: 46px;
+            display: flex;
+            justify-content: space-around;
+            align-self: center;
+            width: 100%;
+        }
+
+        .footer span {
+            background: skyblue;
+            width: 100%;
+            text-align: center;
+            line-height: 46px;
+        }
+
+        .footer .book {
+            background: tomato;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="main">
+            <dl>
+
+            </dl>
+        </div>
+
+        <div class="footer">
+            <span class="book">加入书架</span>
+            <span>开始阅读</span>
+
+        </div>
+    </div>
+
+    <script src="./js/axios.js"></script>
+    <script>
+        let id = localStorage.getItem("id"),
+            dl = document.querySelector("dl"),
+            book = document.querySelector(".book");
+
+        book.addEventListener("click", () => {
+            axios.post("/api/list/modifyFlag", {
+                id,
+            }).then(result => {
+                result.data.code && render()
+            })
+        })
+
+
+
+        function render() {
+            axios.post("/api/list/getData", {
+                id,
+            }).then(result => {
+                let item = result.data;
+                console.log(item)
+                dl.innerHTML = `
+                    <dd>
+                        <img src="${item.url}" alt="">
+                    </dd>
+                    <dt>
+                        <p>${item.title} ------ ${item.auther}</p>
+                        <p>${item.desc}</p>
+                    </dt>
+                `
+                book.innerHTML = item.flag ? "已加入书架" : "加入书架"
+            })
+        }
+        render()
+    </script>
+</body>
+
+</html>
